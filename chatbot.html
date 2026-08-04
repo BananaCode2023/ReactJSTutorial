@@ -19,6 +19,8 @@
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
 
+    <script src="https://unpkg.com/supersimpledev/chatbot.js"></script>
+    
     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
     <script type="text/babel">
 
@@ -59,19 +61,102 @@
         
         const todayIs = dayjs();
 
-        let ChatInput = () => {
+        //chatMessages and setChatMessages are from the App component and are used as props
+        let ChatInput = ({chatMessages, setChatMessages}) => {
+            const [inputText, setInputText] = React.useState('');
+
+            // "e" means event
+            let saveInputText = (e) => {
+                setInputText(e.target.value)
+            }
+
+            let sendMessage = () => {
+                
+                let response = Chatbot.getResponse(inputText)
+
+                //created a variable where the user chat message is saved so whenever the code runs, it is saved first before the response of the chatbot is added
+                let newChatMessages = [
+                    //spread the existing array
+                    ...chatMessages,
+
+                    //this serves as the push of the state (this is added in the new set of array)
+                    {
+                        message: inputText,
+                        sender: 'user',
+                        id: crypto.randomUUID()
+                    }
+                ]
+                //this is the updater function that updates the current data with the new chat message made by the user
+                setChatMessages(newChatMessages);
+                
+                
+
+                //then this code will run after the new chat from the user is received
+                setTimeout( ()=> {
+                    setChatMessages([
+                        //spread the existing array
+                        ...newChatMessages,
+
+                        //this serves as the push of the state (this is added in the new set of array)
+                        {
+                            message: response,
+                            sender: 'robot',
+                            id: crypto.randomUUID()
+                        }
+                    ]);
+                }, 2000)
+                
+                
+                //controlled input
+                //this function sets the inputText = ''
+                setInputText('')
+            }
+
             return (
                 <>
                 <input 
                     type="text" 
-                    placeholder="type anything..." 
+                    placeholder="type anything..."
+                    
+                    onChange={saveInputText} 
+                    //controlled input
+                    value={inputText}
                 />
+                <button onClick={sendMessage}> Send </button>
                 </>
             );
         }
 
-        const ChatMessages = () => {
-            const array = React.useState(
+        //chatMessages and setChatMessages are from the App component and are used as props
+        const ChatMessages = ({chatMessages, setChatMessages}) => {
+            
+            return(
+                <>
+                {chatMessages.map((chatMessage) => {
+                        return(
+                            <>
+                                <ChatMessage 
+                                    key={chatMessage.id}
+                                    message={chatMessage.message}
+                                    sender={chatMessage.sender}
+                                />
+                            </>
+                        )
+                    })}
+                </>
+            );
+        }
+        
+        //input box component
+
+        let App = () => {
+
+            //array destructuring
+            //chatMessages is the original copy of the array (current data)
+            //setChatMessages is the copied array once useState is used (updater function)
+            //lifting the state up (since app is the main component it can be shared in the components below it)
+            const [chatMessages, setChatMessages] = React.useState(
+                //this is the initial value
                 [
                     {
                         id: 1,
@@ -96,53 +181,17 @@
                     },
                 ]
             );
-            //this is the original array data
-            const chatMessages = array[0];
-            //this is the new array data which is copied once state has been used
-            const setChatMessages = array[1];
             
-            let sendMessage = () => {
-                setChatMessages([
-                    //spread the existing array
-                    ...chatMessages,
-                    //this serves as the push of the state
-                    {
-                        message: 'test',
-                        sender: 'user',
-                        id: crypto.randomUUID()
-                    }
-                ]);
-            }
-
-            
-            
-            return(
-                <>
-                <ChatInput />
-                <button onClick={sendMessage}>Send</button>
-
-                {chatMessages.map((chatMessage) => {
-                        return(
-                            <>
-                                <ChatMessage 
-                                    key={chatMessage.id}
-                                    message={chatMessage.message}
-                                    sender={chatMessage.sender}
-                                />
-                            </>
-                        )
-                    })}
-                </>
-            );
-        }
-        
-        //input box component
-
-        let App = () => {
-
             return (
                 <>
-                    <ChatMessages />
+                    <ChatInput 
+                        chatMessages = {chatMessages}
+                        setChatMessages = {setChatMessages}
+                    />
+                    <ChatMessages
+                        chatMessages = {chatMessages}
+                        setChatMessages = {setChatMessages}
+                    />
                 </>
             );
         }
