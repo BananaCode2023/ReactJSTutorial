@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basics</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+
+
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+    //Lesson 2 Exercises
+        
+        //2a
+        // let App = () => {
+        //     return (
+        //         <>
+        //             <p>Hello, welcome to my website</p>
+        //         </>
+        //     );
+        // }
+
+        //2b
+        // let buttons = (
+        //     <div>
+        //         <button>Login</button>    
+        //         <button>Sign up</button>
+        //     </div>
+        // )
+        // let App = () => {
+        //     return (
+        //         <>
+        //             <p>Hello, welcome to my website</p>
+        //             {buttons}
+        //         </>
+        //     );
+        // }
+
+        //2c
+        // let App = () => {
+        //     let loginBtn = <button>Login</button>
+        //     let signUpBtn = <button>Sign up</button>
+        //     let emailInput = <input type="text" placeholder="Email"/>
+        //     let passwordInput = <input type="password" placeholder="Password"/>
+
+        //     return (
+        //         <>
+        //             <p>Hello, welcome to my website</p>
+        //             {emailInput}<br />
+        //             {passwordInput}
+        //             <div>
+        //                 {loginBtn}
+        //                 {signUpBtn}
+        //             </div>
+        //         </>
+        //     );
+        // }
+
+        //2d
+        // let App = () => {
+            
+        //     let LoginForm = () => {
+        //         return (
+        //             <>
+        //                 <input type="text" placeholder="Email"/><br/>
+        //                 <input type="password" placeholder="Password"/>
+        //                 <div>
+        //                     <button>Login</button>
+        //                     <button>Sign up</button>    
+        //                 </div>
+        //             </>
+        //         );
+        //     }
+
+        //     return (
+        //         <>
+        //             <p>Hello, welcome to my website</p>
+        //             <LoginForm />
+        //         </>
+        //     );
+        // }
+
+
+    // let root = ReactDOM.createRoot(document.querySelector('.js-container'))
+    // root.render(<App />)
+
+        //2e
+        // let App = () => {
+        //     let products = [
+        //         {
+        //             id: 1,
+        //             name: 'Cotton Socks',
+        //             price: 6.00
+        //         },
+        //         {
+        //             id: 2,
+        //             name: 'Tennis Balls',
+        //             price: 7.99
+        //         },
+        //         {
+        //             id: 3,
+        //             name: 'Plan T-Shirt',
+        //             price: 10.90
+        //         },
+        //     ]
+
+        //     return (
+        //         <>
+        //             <div>
+        //                 <p>Product Name: {products[0].name}</p>
+        //                 <p>Price: ${products[0].price}</p>
+        //                 <button>Add to Cart</button>
+        //             </div>
+        //         </>
+        //     );
+        // }
+
+        //2f
+        // let products = [
+        //     {
+        //         id: 1,
+        //         name: 'Cotton Socks',
+        //         price: 6.00
+        //     },
+        //     {
+        //         id: 2,
+        //         name: 'Tennis Balls',
+        //         price: 7.99
+        //     },
+        //     {
+        //         id: 3,
+        //         name: 'Plan T-Shirt',
+        //         price: 10.90
+        //     },
+        // ]
+
+        // let App = () => {
+
+        //     let ProductDetails = ({name, price}) => {
+        //         return (
+        //             <div style={{border: "1px solid #ccc", width: "200px", display: "flex", flexDirection: "column", marginBottom: "8px", padding: "8px"}}>
+        //                 <p>Product Name: {name}</p>
+        //                 <p>Price: ${price}</p>
+        //                 <button>Add to Cart</button>
+        //             </div>
+        //         );
+        //     }
+
+        //     return (
+        //         <>
+        //             {products.map((product) => {
+        //                 return (
+        //                     <ProductDetails 
+        //                         key={product.id}
+        //                         name={product.name}
+        //                         price={product.price}
+        //                     />
+        //                 );
+        //             })}
+        //         </>
+        //     );
+        // }
+
+        //2g
+        // let products = [
+        //     {
+        //         id: 1,
+        //         name: 'Cotton Socks',
+        //         price: 6.00,
+        //         discount: 5.45
+        //     },
+        //     {
+        //         id: 2,
+        //         name: 'Tennis Balls',
+        //         price: 7.99,
+        //         discount: 0
+        //     },
+        //     {
+        //         id: 3,
+        //         name: 'Plan T-Shirt',
+        //         price: 10.90,
+        //         discount: 0
+        //     },
+        // ]
+
+        // let App = () => {
+
+        //     let ProductDetails = ({name, price,discount}) => {
+        //         return (
+        //             <div style={{border: "1px solid #ccc", width: "200px", display: "flex", flexDirection: "column", marginBottom: "8px", padding: "8px", gap: '0', lineHeight: '0'}}>
+        //                 <p>Product Name: {name}</p>
+        //                 <p>Price: ${price}</p>
+        //                 {discount > 0 && 
+        //                     <p>Discount Price: ${discount}</p>
+        //                 }
+        //                 <button>Add to Cart</button>
+        //             </div>
+        //         );
+        //     }
+
+        //     return (
+        //         <>
+        //             {products.map((product) => {
+        //                 return (
+        //                     <ProductDetails 
+        //                         key={product.id}
+        //                         name={product.name}
+        //                         price={product.price}
+        //                         discount={product.discount}
+        //                     />
+        //                 );
+        //             })}
+        //         </>
+        //     );
+        // }
+
+        // 2h & 2i
+        // let products = [
+        //     {
+        //         id: 1,
+        //         name: 'Cotton Socks',
+        //         price: 6.00,
+        //         discount: 5.45
+        //     },
+        //     {
+        //         id: 2,
+        //         name: 'Tennis Balls',
+        //         price: 7.99,
+        //         discount: 0
+        //     },
+        //     {
+        //         id: 3,
+        //         name: 'Plain T-Shirt',
+        //         price: 10.90,
+        //         discount: 0
+        //     },
+        // ]
+
+        // let App = () => {
+
+        //     let ProductDetails = ({name, price,discount}) => {
+        //         return (
+        //             <div style={{border: "1px solid #ccc", width: "200px", display: "flex", flexDirection: "column", marginBottom: "8px", padding: "8px", gap: '0', lineHeight: '1.5px'}}>
+        //                 <p>Product Name: {name}</p>
+        //                 {discount > 0 ? 
+        //                     (
+        //                         <>
+        //                             <del>Price: ${price}</del>
+        //                             <p>Discount Price: ${discount}</p>
+        //                         </>
+        //                     ) : 
+        //                     (
+        //                         <>
+        //                             <p>Price: ${price}</p>
+        //                         </>
+        //                     )
+        //                 }
+        //                 <button>Add to Cart</button>
+        //             </div>
+        //         );
+        //     }
+
+        //     return (
+        //         <>
+        //             {products.map((product) => {
+        //                 return (
+        //                     <ProductDetails 
+        //                         key={product.id}
+        //                         name={product.name}
+        //                         price={product.price}
+        //                         discount={product.discount}
+        //                     />
+        //                 );
+        //             })}
+        //         </>
+        //     );
+        // }
+
+        // 2j
+        let products = [
+            {
+                id: 1,
+                name: 'Cotton Socks',
+                price: 6.00,
+                discount: 5.45,
+                imgLink: 'cotton-socks.jpg'
+            },
+            {
+                id: 2,
+                name: 'Tennis Balls',
+                price: 7.99,
+                discount: 0,
+                imgLink: 'tennis-balls.jpg'
+            },
+            {
+                id: 3,
+                name: 'Plain T-Shirt',
+                price: 10.90,
+                discount: 0,
+                imgLink: 'plain-tshirt.jpg'
+            },
+        ]
+
+        let App = () => {
+
+            let ProductDetails = ({name, price,discount,imgLink}) => {
+                return (
+                    <div style={{border: "1px solid #ccc", width: "200px", display: "flex", flexDirection: "column", marginBottom: "8px", padding: "8px", gap: '0', lineHeight: '1.5px'}}>
+                        <img src={imgLink} alt={name} />
+                        <p>Product Name: {name}</p>
+                        {discount > 0 ? 
+                            (
+                                <>
+                                    <del>Price: ${price}</del>
+                                    <p>Discount Price: ${discount}</p>
+                                </>
+                            ) : 
+                            (
+                                <>
+                                    <p>Price: ${price}</p>
+                                </>
+                            )
+                        }
+                        <button>Add to Cart</button>
+                    </div>
+                );
+            }
+
+            return (
+                <>
+                    {products.map((product) => {
+                        return (
+                            <ProductDetails 
+                                key={product.id}
+                                name={product.name}
+                                price={product.price}
+                                discount={product.discount}
+                                imgLink={product.imgLink}
+                            />
+                        );
+                    })}
+                </>
+            );
+        }
+
+    let root = ReactDOM.createRoot(document.querySelector('.js-container'))
+    root.render(<App />)
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basics</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+
+
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+        
+        // lesson 1 excercise
+            const container = document.querySelector('.js-container');
+            
+            // 1a
+            const goodJobBtn = <button>Good Job!</button>
+            // 1b
+            const myName = 'Peter John Reyes'
+            const myNameSentence = <p>My Name is {myName}</p>
+            // 1c
+            const products = [
+                {
+                    id: 1,
+                    productName: 'Cotton Socks',
+                    price: 10
+                },
+                {
+                    id: 2,
+                    productName: 'T-shirt',
+                    price: 8
+                },
+            ]
+            const productInfoDesign = (
+                <div>
+                    <p><strong>{products[0].productName}</strong></p>
+                    <p>${products[0].price}</p>
+                    <button>Add to Cart</button>
+                </div>
+            )
+            // 1d
+            let productCost = products[0].price + (products[1].price * 2)
+            console.log(productCost)
+
+            // 1e
+            const productCostDesign = <p>Product Cost: ${productCost}</p>
+
+            
+            // 1f
+            const shippingCost = 5
+            const shippingCostDesign = <p>Shipping Cost: ${shippingCost}</p>
+            const totalCostDesign = <p>Total Cost: ${productCost + shippingCost}</p>
+            
+            const totalProductInfoDesign = (
+                <div>
+                    {productCostDesign}
+                    {shippingCostDesign}
+                    {totalCostDesign}
+                    <button>Place Your Order</button>
+                </div>
+            )
+
+            // 1g
+            const todayIs = dayjs();
+            console.log(todayIs.format('MMMM D'))
+
+            // 1h
+            const todaySentence = <p>Today is {todayIs.format('MMMM D')}</p>
+
+            // 1i
+            const currentTimeSentence = <p>Current Time: {todayIs.format('HH:mm:ss')}</p>
+
+            // 1j
+            const root = ReactDOM.createRoot(container);
+            
+            setInterval( () => {
+                let runningTime = <p>Current Time: {dayjs().format('HH:mm:ss')}</p>
+                root.render(runningTime)
+            },1000);
+
+            
+
+            // ReactDOM.createRoot(container).render(currentTimeSentence);
+
+    </script>
+</body>
+
+</html>

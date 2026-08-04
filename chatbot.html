@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+
+
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+
+        
+
+        
+        //chat message component
+        let ChatMessage = ({message, sender}) => {
+            
+            return (
+                <>  
+                {/* if sender is user this will show */}
+                {sender === 'user' && (
+                        <div>
+                            {message}
+                            <img 
+                            src="userIcon.png"
+                            alt="user-icon"
+                            width="40px"
+                            />
+                            </div>
+                        )}
+
+                        {/* if sender is robot this will show */}
+                    {sender === 'robot' && (
+                        <div>
+                            <img 
+                            src="robotIcon.png" 
+                            alt="robot-icon"
+                            width="40px"
+                            />
+                            {message}
+                            </div>
+                    )}
+                    </>
+                );
+        }
+        
+        const todayIs = dayjs();
+
+        let ChatInput = () => {
+            return (
+                <>
+                <input 
+                    type="text" 
+                    placeholder="type anything..." 
+                />
+                </>
+            );
+        }
+
+        const ChatMessages = () => {
+            const array = React.useState(
+                [
+                    {
+                        id: 1,
+                        message: 'Hello chatbot',
+                        sender: 'user',
+                    },
+                    {
+                        id: 2,
+                        message: 'Good day sir, how can I help you?',
+                        sender: 'robot',
+                    },
+                    {   
+                        id: 3,
+                        message: 'Can you tell me what time it is?',
+                        sender: 'user',
+                    },
+                    {
+                        id: 4,  
+                        message: `Its already ${todayIs.format('hh:mm')} 
+                        ${todayIs.format('HH') < 12 ? 'am': 'pm'}`,
+                        sender: 'robot',
+                    },
+                ]
+            );
+            //this is the original array data
+            const chatMessages = array[0];
+            //this is the new array data which is copied once state has been used
+            const setChatMessages = array[1];
+            
+            let sendMessage = () => {
+                setChatMessages([
+                    //spread the existing array
+                    ...chatMessages,
+                    //this serves as the push of the state
+                    {
+                        message: 'test',
+                        sender: 'user',
+                        id: crypto.randomUUID()
+                    }
+                ]);
+            }
+
+            
+            
+            return(
+                <>
+                <ChatInput />
+                <button onClick={sendMessage}>Send</button>
+
+                {chatMessages.map((chatMessage) => {
+                        return(
+                            <>
+                                <ChatMessage 
+                                    key={chatMessage.id}
+                                    message={chatMessage.message}
+                                    sender={chatMessage.sender}
+                                />
+                            </>
+                        )
+                    })}
+                </>
+            );
+        }
+        
+        //input box component
+
+        let App = () => {
+
+            return (
+                <>
+                    <ChatMessages />
+                </>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.querySelector('.js-container'))
+        root.render(<App />)
+       
+    </script>
+</body>
+
+</html>
