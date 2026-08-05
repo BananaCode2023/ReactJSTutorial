@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basics</title>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+    //Lesson 3 Exercises
+    
+    //3a
+    // //button function
+    // let clicked = () => {
+    //     console.log('clicked')
+    // }
+    // //button
+    // let clickBtn = <button onClick={clicked}>Clicked 0 times</button>
+
+    // let App = () => {
+    //     return (
+    //         <>
+    //             {clickBtn}
+    //         </>
+    //     );
+    // }
+
+    //3b & 3c
+    // let App = () => {
+        
+    //     //button function
+    //     let [buttonText, setButtonText] = React.useState('Click to Count')
+    //     let [count, setCount] = React.useState(1);
+    //     let [plural, setPlural] = React.useState('');
+
+    //     let clicked = () => {
+    //         setCount(count + 1)
+    //         if(count > 1){
+    //             setPlural(plural = 's')
+    //         }
+    //         setButtonText(buttonText = `Clicked ${count} time${plural}`)
+    //     }
+    
+    //     //button
+    //     let ClickBtn = () => {
+    //         return(
+    //             <button onClick={clicked} style={{cursor: 'pointer'}}>{buttonText}</button>
+    //         );
+    //     }
+    //     return (
+    //         <>
+    //             <ClickBtn />
+    //         </>
+    //     );
+    // }
+
+    //3d
+    // let App = () => {
+
+    //     //button
+    //     let ClickBtn = () => {
+    //     //button function
+    //     let [buttonText, setButtonText] = React.useState('Click to Count')
+    //     let [count, setCount] = React.useState(1);
+    //     let [plural, setPlural] = React.useState('');
+
+    //     let clicked = () => {
+    //         setCount(count + 1)
+    //         if(count > 1){
+    //             setPlural(plural = 's')
+    //         }
+    //         setButtonText(buttonText = `Clicked ${count} time${plural}`)
+    //     }
+
+    //         return(
+    //             <button onClick={clicked} style={{cursor: 'pointer'}}>{buttonText}</button>
+    //         );
+    //     }
+    //     return (
+    //         <>
+    //             <ClickBtn />
+    //             <ClickBtn />
+    //         </>
+    //     );
+    // }
+
+    //3e
+    // let App = () => {
+
+    //     //button function
+    //     let [buttonText, setButtonText] = React.useState('Click to Count')
+    //     let [count, setCount] = React.useState(1);
+    //     let [plural, setPlural] = React.useState('');
+        
+    //     //button
+    //     let ClickBtn = () => {
+
+    //     let clicked = () => {
+    //         setCount(count + 1)
+    //         if(count > 1){
+    //             setPlural(plural = 's')
+    //         }
+    //         setButtonText(buttonText = `Clicked ${count} time${plural}`)
+    //     }
+
+    //         return(
+    //             <button onClick={clicked} style={{cursor: 'pointer'}}>{buttonText}</button>
+    //         );
+    //     }
+    //     return (
+    //         <>
+    //             <ClickBtn />
+    //             <ClickBtn />
+    //         </>
+    //     );
+    // }
+
+    //3f
+    // let App = () => {
+    //     //reset function
+    //     let ResetBtn = () => {
+
+    //         let resetCount = () => {
+    //             setButtonText(buttonText = 'Click to Count')
+    //             setCount(count = 1)
+
+    //         }
+
+    //         return(
+    //             <button onClick={resetCount} style={{cursor: 'pointer'}}>Reset</button>
+    //         );
+    //     }
+        
+    //     //button
+    //     //button function
+    //     let [buttonText, setButtonText] = React.useState('Click to Count')
+    //     let [count, setCount] = React.useState(1);
+    //     let [plural, setPlural] = React.useState('');
+
+    //     let ClickBtn = () => {
+
+    //         let clicked = () => {
+    //             setCount(count + 1)
+    //             if(count > 1){
+    //                 setPlural(plural = 's')
+    //             }
+    //             setButtonText(buttonText = `Clicked ${count} time${plural}`)
+    //         }
+
+    //         return(
+    //             <button onClick={clicked} style={{cursor: 'pointer'}}>{buttonText}</button>
+    //         );
+    //     }
+
+        
+    //     return (
+    //         <>
+    //             <ClickBtn />
+    //             <ClickBtn />
+    //             <ResetBtn />
+    //         </>
+    //     );
+    // }
+
+    //3g
+    // let InputUserName = ({setName}) => {
+
+    //     let [inputName, setInputName] = React.useState('');
+
+        
+    //     let saveInput = (e) => {
+    //         setInputName(e.target.value)
+    //     }
+        
+    //     setName(inputName)
+
+    //     return(
+    //         <input type="text" placeholder="Type a name here" onChange={saveInput} />
+    //     );
+    // }
+
+    // let DisplayName = ({name, setName}) => {
+    //     return(
+    //         <>
+    //             <p>Hello {name}</p>
+    //         </>
+    //     );
+    // }
+
+    // let App = () => {
+
+    //     let [name, setName] = React.useState('');
+
+    //     return(
+    //         <>
+    //             <InputUserName 
+    //                 setName={setName}
+    //             />
+    //             <DisplayName 
+    //                 name={name}
+    //                 setName={setName}
+    //             />
+    //         </>
+    //     );
+    // }
+
+    // 3h
+    let InputUserName = ({setName}) => {
+
+        let [inputName, setInputName] = React.useState('');
+        
+        let saveInput = (e) => {
+            setInputName(e.target.value)
+        }
+        
+        setName(inputName)
+
+        let resetInput = () => {
+            setInputName('')
+        }
+
+        let exampleName = () => {
+            setInputName('Peter John Reyes')
+        }
+
+        return(
+            <>
+                <input type="text" placeholder="Type a name here" onChange={saveInput} value={inputName}/>
+                <button onClick={resetInput}>Reset</button>
+                <button onClick={exampleName}>Example</button>
+            </>
+        );
+    }
+
+    let DisplayName = ({name, setName}) => {
+        return(
+            <>
+                <p>Hello {name}</p>
+            </>
+        );
+    }
+
+    let App = () => {
+
+        let [name, setName] = React.useState('');
+
+        return(
+            <>
+                <InputUserName 
+                    setName={setName}
+                />
+                <DisplayName 
+                    name={name}
+                    setName={setName}
+                />
+            </>
+        );
+    }
+
+    let root = ReactDOM.createRoot(document.querySelector('.js-container'))
+    root.render(<App />)
+
+    </script>
+</body>
+
+</html>

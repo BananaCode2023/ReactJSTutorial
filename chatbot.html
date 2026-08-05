@@ -62,54 +62,78 @@
         const todayIs = dayjs();
 
         //chatMessages and setChatMessages are from the App component and are used as props
-        let ChatInput = ({chatMessages, setChatMessages}) => {
+        let ChatInput = ({chatMessages, setChatMessages, isLoading, setIsLoading}) => {
+            
             const [inputText, setInputText] = React.useState('');
+            
 
             // "e" means event
             let saveInputText = (e) => {
                 setInputText(e.target.value)
             }
 
-            let sendMessage = () => {
-                
-                let response = Chatbot.getResponse(inputText)
-
-                //created a variable where the user chat message is saved so whenever the code runs, it is saved first before the response of the chatbot is added
-                let newChatMessages = [
-                    //spread the existing array
-                    ...chatMessages,
-
-                    //this serves as the push of the state (this is added in the new set of array)
-                    {
-                        message: inputText,
-                        sender: 'user',
-                        id: crypto.randomUUID()
-                    }
-                ]
-                //this is the updater function that updates the current data with the new chat message made by the user
-                setChatMessages(newChatMessages);
-                
-                
-
-                //then this code will run after the new chat from the user is received
-                setTimeout( ()=> {
+            
+            let sendMessage = async (e) => {
+                if(inputText.length > 0){
+                    //controlled input
+                    //this function sets the inputText = ''
+                    setInputText('')
+                    setIsLoading(true)
+    
+                    let response = await Chatbot.getResponseAsync(inputText)
+    
+                    //created a variable where the user chat message is saved so whenever the code runs, it is saved first before the response of the chatbot is added
+                    let newChatMessages = [
+                        //spread the existing array
+                        ...chatMessages,
+    
+                        //this serves as the push of the state (this is added in the new set of array)
+                        {
+                            message: inputText,
+                            sender: 'user',
+                            id: crypto.randomUUID()
+                        }
+                        
+                    ]
+                    console.log(chatMessages)
+                    //this is the updater function that updates the current data with the new chat message made by the user
+                    setChatMessages(newChatMessages);
+                    
+                    
                     setChatMessages([
                         //spread the existing array
                         ...newChatMessages,
-
+    
                         //this serves as the push of the state (this is added in the new set of array)
                         {
-                            message: response,
+                            message: 'Loading...',
                             sender: 'robot',
                             id: crypto.randomUUID()
                         }
                     ]);
-                }, 2000)
+
+    
+                    //then this code will run after the new chat from the user is received
+                    setTimeout( ()=> {
+                        setIsLoading(false)
+
+                        setChatMessages([
+                            //spread the existing array
+                            ...newChatMessages,
+        
+                            //this serves as the push of the state (this is added in the new set of array)
+                            {
+                                message: response,
+                                sender: 'robot',
+                                id: crypto.randomUUID()
+                            }
+                        ]);
+                    }, 2500)
+                }
+                else{
+                    return ;
+                }
                 
-                
-                //controlled input
-                //this function sets the inputText = ''
-                setInputText('')
             }
 
             return (
@@ -121,8 +145,17 @@
                     onChange={saveInputText} 
                     //controlled input
                     value={inputText}
+                    onKeyDown={(e) => {
+                        if(e.key === 'Enter'){
+                            isLoading === false && sendMessage();
+                        }
+                        else if(e.key === 'Escape'){
+                            isLoading === false && setInputText('')
+                        }
+                        
+                    }}                 
                 />
-                <button onClick={sendMessage}> Send </button>
+                <button onClick={isLoading === false && sendMessage}> Send </button>
                 </>
             );
         }
@@ -134,13 +167,11 @@
                 <>
                 {chatMessages.map((chatMessage) => {
                         return(
-                            <>
                                 <ChatMessage 
                                     key={chatMessage.id}
                                     message={chatMessage.message}
                                     sender={chatMessage.sender}
                                 />
-                            </>
                         )
                     })}
                 </>
@@ -181,12 +212,16 @@
                     },
                 ]
             );
+
+            const [isLoading, setIsLoading] = React.useState(false)
             
             return (
                 <>
                     <ChatInput 
                         chatMessages = {chatMessages}
                         setChatMessages = {setChatMessages}
+                        isLoading = {isLoading}
+                        setIsLoading = {setIsLoading}
                     />
                     <ChatMessages
                         chatMessages = {chatMessages}
