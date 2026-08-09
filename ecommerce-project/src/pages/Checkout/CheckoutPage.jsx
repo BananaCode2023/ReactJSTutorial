@@ -1,10 +1,12 @@
 import { Link } from 'react-router';
 import { CheckoutHeader } from './components/CheckoutHeader';
 import './CheckoutPage.css'
+import CheckoutFavicon from '../../assets/images/cart-favicon.png'
 
 export function CheckoutPage() {
     return (
         <>
+            <link rel="icon" type="image/svg+xml" href={CheckoutFavicon} />
             <CheckoutHeader />
 
             <div className="checkout-page">

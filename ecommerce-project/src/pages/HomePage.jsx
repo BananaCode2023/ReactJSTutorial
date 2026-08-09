@@ -1,10 +1,12 @@
 
 import './HomePage.css'
 import { Header } from '../components/Header';
+import HomeFavicon from '../assets/images/home-favicon.png'
 
 export function HomePage () {
     return (
-    <>
+        <>
+        <link rel="icon" type="image/svg+xml" href={HomeFavicon} />
         <Header />
 
         <div className="home-page">
