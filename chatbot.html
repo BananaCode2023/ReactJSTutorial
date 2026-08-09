@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -34,8 +35,8 @@
                 <>  
                 {/* if sender is user this will show */}
                 {sender === 'user' && (
-                        <div>
-                            {message}
+                        <div className="chat-bot-div user">
+                            <p className="chat-bot-message">{message}</p>
                             <img 
                             src="userIcon.png"
                             alt="user-icon"
@@ -46,13 +47,13 @@
 
                         {/* if sender is robot this will show */}
                     {sender === 'robot' && (
-                        <div>
+                        <div className="chat-bot-div robot">
                             <img 
                             src="robotIcon.png" 
                             alt="robot-icon"
                             width="40px"
                             />
-                            {message}
+                            <p className="chat-bot-message">{message}</p>
                             </div>
                     )}
                     </>
@@ -106,7 +107,8 @@
     
                         //this serves as the push of the state (this is added in the new set of array)
                         {
-                            message: 'Loading...',
+                            message:
+                                    <img src='loading-spinner.gif' alt="loading-spinner" width="16px" style={{marginRight: '4px'}}/>,
                             sender: 'robot',
                             id: crypto.randomUUID()
                         }
@@ -138,33 +140,60 @@
 
             return (
                 <>
-                <input 
-                    type="text" 
-                    placeholder="type anything..."
-                    
-                    onChange={saveInputText} 
-                    //controlled input
-                    value={inputText}
-                    onKeyDown={(e) => {
-                        if(e.key === 'Enter'){
-                            isLoading === false && sendMessage();
-                        }
-                        else if(e.key === 'Escape'){
-                            isLoading === false && setInputText('')
-                        }
+                <div className="chat-input-container">
+                    <input 
+                        type="text" 
+                        placeholder="Type anything..."
                         
-                    }}                 
-                />
-                <button onClick={isLoading === false && sendMessage}> Send </button>
+                        onChange={saveInputText} 
+                        //controlled input
+                        value={inputText}
+                        className="chat-input"
+                        onKeyDown={(e) => {
+                            if(e.key === 'Enter'){
+                                isLoading === false && sendMessage();
+                            }
+                            else if(e.key === 'Escape'){
+                                isLoading === false && setInputText('')
+                            }
+                            
+                        }}                 
+                    />
+                    <button onClick={isLoading === false && sendMessage}> Send </button>
+                </div>
                 </>
             );
         }
 
         //chatMessages and setChatMessages are from the App component and are used as props
         const ChatMessages = ({chatMessages, setChatMessages}) => {
+            const chatMessagesRef = useAutoScroll([chatMessages]);
             
+            function useAutoScroll (dependencies) {
+            
+                const containerRef = React.useRef(null)
+
+                //always put hooks in the top of the component, do not put hooks inside anything (if statement or function)
+                //the array [chatMessages] is a dependency array = it is the control when useEffect runs
+                //Best practice for a useEffect is to give it a dependency array to avoid running too often 
+                React.useEffect( () => {
+                    const containerElement = containerRef.current
+                    
+
+                    if(containerElement) {
+                        containerElement.scrollTop = containerElement.scrollHeight;
+                    }
+                }, dependencies);
+
+                return containerRef;
+            }
+
             return(
                 <>
+                <div 
+                    className="chat-messages-container"
+                    ref={chatMessagesRef}
+                >
                 {chatMessages.map((chatMessage) => {
                         return(
                                 <ChatMessage 
@@ -174,6 +203,7 @@
                                 />
                         )
                     })}
+                </div>
                 </>
             );
         }
@@ -188,44 +218,23 @@
             //lifting the state up (since app is the main component it can be shared in the components below it)
             const [chatMessages, setChatMessages] = React.useState(
                 //this is the initial value
-                [
-                    {
-                        id: 1,
-                        message: 'Hello chatbot',
-                        sender: 'user',
-                    },
-                    {
-                        id: 2,
-                        message: 'Good day sir, how can I help you?',
-                        sender: 'robot',
-                    },
-                    {   
-                        id: 3,
-                        message: 'Can you tell me what time it is?',
-                        sender: 'user',
-                    },
-                    {
-                        id: 4,  
-                        message: `Its already ${todayIs.format('hh:mm')} 
-                        ${todayIs.format('HH') < 12 ? 'am': 'pm'}`,
-                        sender: 'robot',
-                    },
-                ]
+                []
             );
 
             const [isLoading, setIsLoading] = React.useState(false)
             
             return (
                 <>
+                    {chatMessages.length === 0 ? <p className="welcome-message">Welcome to chatbot project! Send a message using the texbox below.</p> : ''}
+                    <ChatMessages
+                        chatMessages = {chatMessages}
+                        setChatMessages = {setChatMessages}
+                    />
                     <ChatInput 
                         chatMessages = {chatMessages}
                         setChatMessages = {setChatMessages}
                         isLoading = {isLoading}
                         setIsLoading = {setIsLoading}
-                    />
-                    <ChatMessages
-                        chatMessages = {chatMessages}
-                        setChatMessages = {setChatMessages}
                     />
                 </>
             );

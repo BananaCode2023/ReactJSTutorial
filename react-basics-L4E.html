@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Basics</title>
+    <style>
+        /* .switch-button {
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.4s;
+            width: 60px;
+            &:hover{
+                opacity: 0.6;
+            }
+            &.on{
+                border: 1px solid rgb(25,135,85);
+                background-color: rgb(25,135,85);
+                color: white;
+                
+            }
+            &.off{
+                border: 1px solid rgb(220,53,69);
+                background-color: rgb(220,53,69);
+                color: white;
+            }
+        }
+
+        .switch-toggle-btn{
+            width: 100px;
+            cursor: pointer;
+        } */
+
+        button{
+            background-color: rgb(0, 123, 255);
+            padding: 4px 8px;
+            border: 1px solid rgb(0, 123, 255);
+            border-radius: 4px;
+            color: white;
+            margin-right: 4px;
+            margin-top: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        input{
+            padding: 8px;
+            font-size: 12px;
+            border: 1px solid #999;
+            border-radius: 4px;
+        }
+
+        .password-div{
+            button{
+                background-color: #ccc;
+                font-weight: 600;
+                padding: 5px 8px;
+                margin-left: 4px;
+                border: 1px solid #999;
+                border-radius: 4px;
+                color: black;
+                margin-top: 8px;
+                cursor: pointer;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev@3.2.1/external-library.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
+    <script type="text/babel">
+    //Lesson 4 Exercises
+    
+    //4a, 4b, 4c
+    // let Button = () => {
+    //     let [isButtonOn, setIsButtonOn] = React.useState(true)
+
+    //     let clicked = () => {
+    //         if(isButtonOn === true){
+    //            setIsButtonOn(false) 
+    //         }
+    //         else{
+    //             setIsButtonOn(true) 
+    //         }
+    //     }
+
+    //     return(
+    //         <> 
+    //             <button 
+    //                 className={`switch-button ${isButtonOn === true? 'on': 'off'}`} 
+    //                 onClick={clicked}
+    //             >
+    //                 {isButtonOn === true? 'ON' : 'OFF'}
+    //             </button>
+    //         </>
+    //     )
+    // }
+
+    //extra shit
+    // let Button = () => {
+    //     let [isButtonOn,setIsButtonOn] = React.useState(true)
+
+    //     let buttonImg = [
+    //         'off-wall-btn.png',
+    //         'on-wall-btn.png',
+    //         'off-bulb.png',
+    //         'on-bulb.png'
+    //     ]
+
+    //     let toggleBtn = () => {
+    //         if(isButtonOn === true){
+    //             setIsButtonOn(false)
+    //         }
+    //         else{
+    //             setIsButtonOn(true)
+    //         }
+    //     }
+
+    //     return (
+    //         <>
+    //             <img className="switch-toggle-btn" src={isButtonOn === true ? buttonImg[1] : buttonImg[0]} alt="" onClick={toggleBtn}/>
+    //             <img className="switch-toggle-btn" src={isButtonOn === true ? buttonImg[3] : buttonImg[2]} alt="" onClick={toggleBtn}/>
+    //         </>
+    //     )
+    // }
+
+    //4d & 4e
+    // let App = () => {
+        
+    //     let LoginForm = () => {
+    //         let [showPassword,setShowPassword] = React.useState(true)
+    
+    //         let [passwordValue, setPasswordValue] = React.useState('')
+    
+    
+    //         let savePasswordInput = (e) => {
+    //             setPasswordValue(e.target.value)
+    //         }
+    
+    //         let showPasswordClicked = () => {
+    //             if(showPassword === true){
+    //                 setShowPassword(false)
+    //             } else{
+    //                 setShowPassword(true)
+    //             }  
+    //         }
+
+    //         return (
+    //             <>
+    //                 <input type="text" placeholder="Email"/><br/>
+    //                 <div className="password-div">
+    //                     <input 
+    //                         type={showPassword === true ? 'password' : "name"} 
+    //                         placeholder="Password"
+    //                         value={passwordValue}
+    //                         onChange={savePasswordInput}
+    //                     />
+    //                     <button 
+    //                     onClick={showPasswordClicked}
+    //                     >{showPassword === true ? '🙈 Show Password' : "🙉 Hide Password"}</button>
+    //                 </div>
+    //                 <div>
+    //                     <button>Login</button>
+    //                     <button>Sign up</button>    
+    //                 </div>
+    //             </>
+    //         );
+    //     }
+
+    //     return (
+    //         <>
+    //             <p>Hello, welcome to my website</p>
+    //             <LoginForm />
+    //         </>
+    //     );
+    // }
+
+    // 4f & 4g
+    
+    // let TimeComponent = () => {
+        
+    //     let [currentTime, setCurrentTime] = React.useState('');
+        
+    //     React.useEffect( () => {
+            
+    //         setInterval( () => {
+    //             setCurrentTime(time)
+    //             console.log(`run code`)
+    //         },1000)
+    //     }, [currentTime])
+        
+        
+
+    //     const todayIs = dayjs();
+        
+    //     let time = todayIs.format('hh:mm:ss');
+    //     let timeText = `${time} ${todayIs.format('HH') < 12 ? 'AM' : 'PM'}`;
+
+        
+
+    //     return(
+    //         <>
+    //             <p>{timeText}</p>
+    //         </>
+    //     )
+    // }
+
+    // 4h
+    let App = () => {
+        let [countClick, setCountClick] = React.useState(0)
+        let [plural, setPlural] = React.useState('')
+        let currentCount = React.useRef(countClick)
+        let buttonRef = React.useRef()
+
+        function clickCounterFunction() {
+            if(countClick > 0) {
+                setPlural('s')
+            }
+            setCountClick(countClick + 1)
+        }
+
+        function resetCounterFunction() {
+            setCountClick(0)
+            if(currentCount.current < 1) {
+                setPlural('')
+            }
+        }
+
+        function autoClickerFunction() {
+            setInterval( () => {
+                let buttonElem = buttonRef.current
+
+                if(buttonElem) {
+                    buttonElem.click()
+                }
+            },1000)
+        }
+
+        
+        let ClickBtn = () => {
+            return (
+                <button onClick={clickCounterFunction} ref={buttonRef}>Clicked {countClick} time{plural}</button>
+            );
+        }
+
+        let ResetBtn = () => {
+            return (
+                <button onClick={resetCounterFunction}>Reset Count</button>
+            ); 
+        }
+
+        let AutoClickButton = () => {
+             return (
+                <button onClick={autoClickerFunction}>Auto Clicker</button>
+            );
+        }
+
+        return (
+            <>
+                <ClickBtn/>
+                <ResetBtn />
+                <AutoClickButton />
+            </>
+        );
+    }
+
+    let root = ReactDOM.createRoot(document.querySelector('.js-container'))
+    root.render(<App />)
+
+    </script>
+</body>
+
+</html>
