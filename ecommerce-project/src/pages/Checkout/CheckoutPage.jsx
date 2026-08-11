@@ -3,7 +3,7 @@ import { CheckoutHeader } from './components/CheckoutHeader';
 import './CheckoutPage.css'
 import CheckoutFavicon from '../../assets/images/cart-favicon.png'
 
-export function CheckoutPage() {
+export function CheckoutPage({cart}) {
     return (
         <>
             <link rel="icon" type="image/svg+xml" href={CheckoutFavicon} />
