@@ -11,6 +11,7 @@ export function CheckoutPage({cart}) {
 
     let [deliveryOptions, setDeliveryOptions] = useState([])
     const [paymentSummary, setPaymentSummary] = useState(null);
+    
 
     useEffect(() => {
         let fetchCheckoutData = async () => {
@@ -19,8 +20,10 @@ export function CheckoutPage({cart}) {
 
             response = await axios.get('/api/payment-summary')
             setPaymentSummary(response.data);
-        }
 
+            
+        }
+        
         fetchCheckoutData();
     }, [])
 
@@ -29,7 +32,7 @@ export function CheckoutPage({cart}) {
         <>
             <link rel="icon" type="image/svg+xml" href={CheckoutFavicon} />
 
-            <CheckoutHeader />
+            <CheckoutHeader cart={cart}/>
 
             <div className="checkout-page">
                 <div className="page-title">Review your order</div>
