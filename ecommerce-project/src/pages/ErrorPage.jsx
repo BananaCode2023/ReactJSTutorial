@@ -6,7 +6,6 @@ export function ErrorPage () {
     return(
         <>
             <title>404</title>  
-            <Header />
 
             <div className="error-page-background">
                 <div className="error-page-texts">
