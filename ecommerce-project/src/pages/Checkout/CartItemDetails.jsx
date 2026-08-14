@@ -4,7 +4,7 @@ import { formatMoney } from "../../utils/money";
 import { DeliveryOptions } from "./DeliveryOptions";
 import { DeliveryDate } from "./components/DeliveryDate";
 
-export function CartItemDetails ({cart, deliveryOptions}) {
+export function CartItemDetails ({cart, deliveryOptions, loadCart}) {
     return (
         <Fragment>
             {deliveryOptions.length > 0 &&
@@ -44,7 +44,7 @@ export function CartItemDetails ({cart, deliveryOptions}) {
                     </div>
                     </div>
 
-                    <DeliveryOptions deliveryOptions={deliveryOptions} cartItem={cartItem}/>
+                    <DeliveryOptions deliveryOptions={deliveryOptions} cartItem={cartItem} loadCart={loadCart}/>
                     
                 </div>
                 </div>
