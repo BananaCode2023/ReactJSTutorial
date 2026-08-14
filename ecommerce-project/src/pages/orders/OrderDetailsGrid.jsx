@@ -31,7 +31,7 @@ export function OrderDetailsGrid({ order }) {
               </button>
             </div>
 
-            <ProductActions orderProduct={orderProduct}/>
+            <ProductActions orderProduct={orderProduct} order={order} />
           </Fragment>
         );
       })}

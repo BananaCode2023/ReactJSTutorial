@@ -2,10 +2,11 @@ import { Link } from "react-router";
 import { Header } from "../components/Header";
 import './ErrorPage.css'
 
-export function ErrorPage () {
+export function ErrorPage ({cart}) {
     return(
         <>
             <title>404</title>  
+            <Header cart={cart}/>
 
             <div className="error-page-background">
                 <div className="error-page-texts">
