@@ -1,15 +1,20 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money";
 import { DeliveryOptions } from "./DeliveryOptions";
 import { DeliveryDate } from "./components/DeliveryDate";
 import { DeleteBtn } from "./DeleteBtn";
+import { QuantityLabel } from "./QuantityLabel";
 
 export function CartItemDetails({ cart, deliveryOptions, loadCart }) {
+
+  
+
   return (
     <Fragment>
       {deliveryOptions.length > 0 &&
         cart.map((cartItem) => {
+
           const selectedDeliveryOption = deliveryOptions.find(
             (deliveryOption) => {
               return deliveryOption.id === cartItem.deliveryOptionId;
@@ -29,15 +34,9 @@ export function CartItemDetails({ cart, deliveryOptions, loadCart }) {
                     {formatMoney(cartItem.product.priceCents)}
                   </div>
                   <div className="product-quantity">
-                    <span>
-                      Quantity:{" "}
-                      <span className="quantity-label">
-                        {cartItem.quantity}
-                      </span>
-                    </span>
-                    <span className="update-quantity-link link-primary">
-                      Update
-                    </span>
+                      <QuantityLabel cartItem={cartItem} loadCart={loadCart}/>
+                    
+                    
                     <DeleteBtn cartItem={cartItem} loadCart={loadCart}/>
                   </div>
                 </div>

@@ -209,3 +209,16 @@
   margin-top: 20px;
   margin-bottom: 19px;
 }
+
+.update-quantity-container{
+  position: relative;
+}
+.updated-quantity{
+  color: rgb(25, 135, 84);
+  position: absolute;
+  top: 28px;
+  left: 0;
+  font-size: 12px;
+  display: flex;
+  width: 120px;
+}

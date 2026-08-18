@@ -155,3 +155,32 @@
   height: 34px;
   margin-top: 1px;
 }
+
+.no-products{
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  top: calc(50% - 25px);
+  left: 0;
+  h2{
+    opacity: 0.4;
+  }
+}
+
+.back-home-button {
+  width: 240px !important;
+  padding: 8px !important;
+  height: 34px !important;
+  margin-top: 1px !important;
+  background-color: rgb(25, 135, 84);
+  color: #fff;
+  border: rgb(25, 135, 84);
+  border-radius: 4px;
+  &:hover{
+    opacity: 0.6;
+  }
+}
